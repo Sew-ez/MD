@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.dicoding.sewez.ui.BottomNavBar
 import com.dicoding.sewez.ui.CategoryScreen
 import com.dicoding.sewez.ui.HomeScreen
+import com.dicoding.sewez.ui.JenisPaketScreen
 import com.dicoding.sewez.ui.SEWEZTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,6 +45,9 @@ class MainActivity : ComponentActivity() {
                             }
                             composable("cart") { CartScreen() }
                             composable("user") { UserScreen() }
+                            composable("jenis_paket") {
+                                JenisPaketScreen(navController = navController)
+                            }
                         }
                     }
                 }

@@ -131,10 +131,12 @@ fun FoundYourDesignSection() {
 
 @Composable
 fun CategoryItem(imageRes: Int, text: String, navController: NavController) {
+    val tshirt_destination = if (text == "T-Shirt") "jenis_paket" else "category/$text"
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.clickable {
-            navController.navigate("category/$text")
+            navController.navigate(tshirt_destination)
         }
     ) {
         Image(
@@ -148,4 +150,3 @@ fun CategoryItem(imageRes: Int, text: String, navController: NavController) {
         Text(text = text, fontSize = 14.sp)
     }
 }
-
