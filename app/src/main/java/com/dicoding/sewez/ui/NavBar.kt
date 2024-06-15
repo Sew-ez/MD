@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +19,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.dicoding.sewez.R
 
+data class BottomNavItem(val route: String, val icon: Int, val label: String)
+
 @Composable
 fun BottomNavBar(navController: NavController) {
     val items = listOf(
@@ -27,6 +28,7 @@ fun BottomNavBar(navController: NavController) {
         BottomNavItem("cart", R.drawable.ic_cart, "Cart"),
         BottomNavItem("user", R.drawable.ic_user, "User")
     )
+
     BottomNavigation(
         backgroundColor = Color.White,
         contentColor = MaterialTheme.colors.primary,
@@ -71,5 +73,3 @@ fun BottomNavBar(navController: NavController) {
         }
     }
 }
-
-data class BottomNavItem(val route: String, val icon: Int, val label: String)

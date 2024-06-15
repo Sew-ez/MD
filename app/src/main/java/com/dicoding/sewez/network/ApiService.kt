@@ -6,14 +6,20 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
-    @GET("/api/jenis-bahan")
+    @POST("register")
+    suspend fun registerUser(@Body request: RegisterRequest): Response<AuthResponse>
+
+    @POST("login")
+    suspend fun loginUser(@Body request: LoginRequest): Response<AuthResponse>
+
+    @GET("jenis-bahan")
     suspend fun getJenisBahan(): Response<List<String>>
 
-    @GET("/api/warna")
+    @GET("warna")
     suspend fun getWarna(): Response<List<String>>
 
     @Multipart
-    @POST("/api/submit-order")
+    @POST("submit-order")
     suspend fun submitOrder(
         @Part file: MultipartBody.Part,
         @Part("jenis_bahan") jenisBahan: RequestBody,
@@ -24,6 +30,11 @@ interface ApiService {
         @Part("jumlah_xl") jumlahXL: RequestBody
     ): Response<OrderResponse>
 }
+
+data class RegisterRequest(val name: String, val email: String, val password: String)
+data class LoginRequest(val email: String, val password: String)
+data class AuthResponse(val error: Boolean, val message: String, val loginResult: LoginResult? = null)
+data class LoginResult(val userId: String, val name: String, val token: String)
 
 data class OrderResponse(val success: Boolean, val message: String, val orderDetails: OrderDetails)
 
