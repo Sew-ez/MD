@@ -100,7 +100,7 @@ fun FoundYourDesignSection() {
             .fillMaxWidth()
             .background(Color.LightGray) // Warna background untuk seluruh kolom
             .verticalScroll(rememberScrollState()) // Enable vertical scrolling
-            .padding(2.dp)
+            .padding(0.dp)
     ) {
         Text(
             text = "Found your design",
@@ -120,7 +120,7 @@ fun FoundYourDesignSection() {
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .padding(vertical = 1.dp, horizontal = 1.dp) // Padding vertical antara item
+                    .padding(vertical = 0.dp, horizontal = 0.dp) // Padding vertical antara item
                     .aspectRatio(8f / 10f)
                     .size(180.dp)
             )

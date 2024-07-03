@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-android")
     id("com.google.relay") version "0.3.12"
+    id("kotlin-parcelize")
 }
 
 android {
@@ -111,8 +112,14 @@ dependencies {
     implementation ("androidx.navigation:navigation-compose:2.7.7-alpha10")
 
     //API Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2") //untuk lifecycleScope
+
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.5")
+
+    implementation("io.coil-kt:coil-compose:1.4.0")
 }

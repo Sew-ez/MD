@@ -43,7 +43,7 @@ fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel = 
             modifier = Modifier.size(200.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Lengkapi data dirimu di bawah ini ya", fontSize = 18.sp)
+        Text(text = "Daftar Sekarang dan Ekspresikan Gayamu", fontSize = 18.sp)
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(

@@ -40,8 +40,8 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel = vie
             modifier = Modifier.size(200.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "SEW-EZ bih bos, senggol dong", fontSize = 18.sp)
-        Text(text = "Eits tapi masukin akun dulu", fontSize = 14.sp, color = Color.Gray)
+        Text(text = "Personalize Your Style", fontSize = 18.sp)
+        Text(text = "", fontSize = 14.sp, color = Color.Gray)
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(

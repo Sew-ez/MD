@@ -1,6 +1,7 @@
 package com.dicoding.sewez.ui
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +20,8 @@ class AuthViewModel : ViewModel() {
     fun registerUser(context: Context, name: String, email: String, password: String) {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstance.api.registerUser(RegisterRequest(name, email, password))
+                val response =
+                    RetrofitInstance.api.registerUser(RegisterRequest(name, email, password))
                 if (response.isSuccessful) {
                     isSuccess = response.body()?.error == false
                     responseMessage = response.body()?.message ?: ""
@@ -45,6 +47,7 @@ class AuthViewModel : ViewModel() {
                     responseMessage = response.body()?.message ?: ""
                     userToken = response.body()?.loginResult?.token
                     if (isSuccess && userToken != null) {
+                        Log.d("Token", "Login token: $userToken")
                         PreferencesHelper.saveLoginSession(context, userToken!!)
                     }
                 } else {
@@ -61,8 +64,28 @@ class AuthViewModel : ViewModel() {
     }
 
     fun logoutUser(context: Context) {
-        PreferencesHelper.clearLoginSession(context)
-        isSuccess = false
-        userToken = null
+        viewModelScope.launch {
+            val token = PreferencesHelper.getLoginSession(context) ?: return@launch
+
+            try {
+                val response = RetrofitInstance.api.logoutUser(LogoutRequest(token))
+                if (response.isSuccessful) {
+                    isSuccess = response.body()?.error == false
+                    responseMessage = response.body()?.message ?: ""
+                    if (isSuccess) {
+                        PreferencesHelper.clearLoginSession(context)
+                        userToken = null
+                    }
+                } else {
+                    isSuccess = false
+                    responseMessage = response.errorBody()?.string() ?: "Unknown error"
+                }
+                Toast.makeText(context, responseMessage, Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                isSuccess = false
+                responseMessage = e.message ?: "Error occurred"
+                Toast.makeText(context, responseMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
